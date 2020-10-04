@@ -9,14 +9,19 @@ window = Tk()
 window.configure(background=bgColor, height=450, width=800)
 
 def crarComponente():
-    #cambiar dir
-    os.chdir(direccion.get())
-    #correr nrcg
-    cmdNRCG = 'nrcg -n ' + nombre.get()
-    os.system(cmdNRCG)
-    #print('success', direccion.get(), nombre.get(), tipo.get())
-    #cambiar a pantalla
-    l2.pack_forget()
+    if (direccion.get() == "Elegir Carpeta" or nombre.get() == "" or tipo.get() == "Elegir tipo"):
+        print('llenar campos')
+        l5.place(x=280,y=350)
+    else:
+        #cambiar dir
+        os.chdir(direccion.get())
+        #correr nrcg
+        cmdNRCG = 'nrcg -n ' + nombre.get()
+        os.system(cmdNRCG)
+        print('success', direccion.get(), nombre.get(), tipo.get())
+        l5.place_forget()
+
+        #cambiar a pantalla
 
 
 def elegirDireccion():
@@ -67,5 +72,7 @@ b1 = Button(window, text="Crear Componente", command=crarComponente,width=15, bg
 b1.config(font=('',16))
 b1.place(x=300,y=300)
 
+l5 = Label(window, text="Llenar todos los campos", bg=bgColor, fg='red')
+l5.config(font=('',16))
 
 window.mainloop()
