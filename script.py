@@ -1,3 +1,4 @@
+import os
 from tkinter import *
 from tkinter.filedialog import askdirectory#https://www.tutorialspoint.com/python/python_gui_programming.htm
 #change from using grif to using l1.place(x=20,y=10)
@@ -8,7 +9,15 @@ window = Tk()
 window.configure(background=bgColor, height=450, width=800)
 
 def crarComponente():
-    print('success', direccion.get(), nombre.get(), tipo.get())
+    #cambiar dir
+    os.chdir(direccion.get())
+    #correr nrcg
+    cmdNRCG = 'nrcg -n ' + nombre.get()
+    os.system(cmdNRCG)
+    #print('success', direccion.get(), nombre.get(), tipo.get())
+    #cambiar a pantalla
+    l2.pack_forget()
+
 
 def elegirDireccion():
     global direccion
