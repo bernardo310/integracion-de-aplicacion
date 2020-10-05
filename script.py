@@ -1,7 +1,7 @@
 import os
 from tkinter import *
 from tkinter.filedialog import askdirectory#https://www.tutorialspoint.com/python/python_gui_programming.htm
-#change from using grif to using l1.place(x=20,y=10)
+
 bgColor = '#75bbfd'
 fgColor = '#000000'
 
