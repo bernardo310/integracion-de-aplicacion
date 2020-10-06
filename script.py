@@ -1,6 +1,8 @@
 import os
+import tkinter as tk
 from tkinter import *
 from tkinter.filedialog import askdirectory#https://www.tutorialspoint.com/python/python_gui_programming.htm
+from tkinter.messagebox import showinfo
 
 bgColor = '#ffffff'
 fgColor = '#000000'
@@ -12,8 +14,7 @@ window.configure(background=bgColor, height=400, width=800)
 def crearComponente():
     #Revisa si se llenaron los campos obligatorios
     if (direccion.get() == "Elegir Carpeta" or nombre.get() == ""):
-        print('llenar campos')
-        l5.place(x=280,y=350)
+        mensaje_error = showinfo('Error', 'No se han llenado todos los campos obligatorios')
     else:
         #cambiar dir
         os.chdir(direccion.get())
@@ -31,9 +32,7 @@ def crearComponente():
         #Corre el comando
         os.system(cmdNRCG)
         print(cmdNRCG)
-        l5.place_forget()
-
-        #cambiar a pantalla
+        mensaje_confirmacion = showinfo('Confirmacion', 'El componente se creo con exito')
 
 #Funcion para elegir carpeta
 def elegirDireccion():
@@ -46,7 +45,7 @@ l1 = Label(window, text="Creador de Componentes React", bg=bgColor, fg=fgColor, 
 l1.place(x=230, y=30)
 
 #Selección de direccion
-l2 = Label(window, text="Dirección del componente", bg=bgColor, fg=fgColor)
+l2 = Label(window, text="Dirección del componente*", bg=bgColor, fg=fgColor)
 l2.config(font='Helvetica 16 bold')
 l2.place(x=140,y=100)
 direccion = StringVar()
@@ -56,7 +55,7 @@ e1.config(font='Helvetica 16')
 e1.place(x=400,y=100)
 
 #Nombre del componente
-l3 = Label(window, text="Nombre del componente", bg=bgColor, fg=fgColor)
+l3 = Label(window, text="Nombre del componente*", bg=bgColor, fg=fgColor)
 l3.config(font='Helvetica 16 bold')
 l3.place(x=140,y=150)
 nombre = StringVar()
@@ -68,16 +67,11 @@ e2.place(x=400,y=150)
 l4 = Label(window, text="Opciones a añadir", bg=bgColor, fg=fgColor)
 l4.config(font='Helvetica 16 bold')
 l4.place(x=140,y=237.5)
-# e2_value = StringVar()
-# e2=Entry(window, textvariable=e1_value)
-# e2.config(font=('',16))
-# e2.place(x=400,y=140)
 tipos = ['Redux', 'React Arrow', 'CSS', 'Node sass']
 var_r = IntVar(window)
 var_v = IntVar(window)
 var_c = IntVar(window)
 var_s = IntVar(window)
-var_r.set('Elegir opciones')
 opcion1 = Checkbutton(window, text=tipos[0], variable=var_r, onvalue = 1, offvalue = 0)
 opcion1.config(font=('', 16))
 opcion1.place(x=400,y=200)
@@ -95,9 +89,5 @@ opcion4.place(x=400, y=275)
 b1 = Button(window, text="Crear componente", command=crearComponente,width=15, bg='#d9ecff', fg=fgColor)
 b1.config(font=('',16))
 b1.place(x=300,y=325)
-
-#Mensaje de error
-l5 = Label(window, text="No todos los campos estan llenos", bg=bgColor, fg='red')
-l5.config(font=('',16))
 
 window.mainloop()
